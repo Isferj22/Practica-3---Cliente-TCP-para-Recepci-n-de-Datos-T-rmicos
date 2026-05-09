@@ -1,101 +1,93 @@
 # Práctica 3 - Cliente TCP para Recepción de Datos Térmicos
 
 ## Introducción
-
-Esta práctica consiste en desarrollar un cliente TCP en C++ capaz de conectarse a un servidor Python que simula una cámara térmica. El cliente recibe datos de temperatura en formato de punto flotante (`float`) a través de sockets TCP/IP y los procesa mostrando la información recibida por terminal y almacenándola en un archivo de salida.
-
----
-
-# Descripción del problema
-
-El objetivo principal de la práctica es implementar una comunicación cliente-servidor mediante sockets utilizando TCP/IP.
-
-El servidor (`ServidorCamara.py`) actúa como una cámara térmica simulada que envía datos de temperatura al cliente. El cliente debe:
-
-- Crear un socket TCP.
-- Conectarse al servidor.
-- Recibir los datos enviados.
-- Interpretar los datos como números de punto flotante (`float`).
-- Mostrar los datos recibidos por pantalla.
-- Guardar los datos en un archivo de salida (`salida.txt`).
-- Gestionar posibles errores de conexión.
-
-La práctica permite comprender el funcionamiento básico de las comunicaciones en red mediante sockets y el intercambio de datos binarios entre aplicaciones escritas en distintos lenguajes.
+Esta práctica consiste en desarrollar un cliente TCP en C++ capaz de conectarse a un servidor Python que simula una cámara térmica. El cliente recibe datos de temperatura en formato de punto flotante (`float`) a través de sockets TCP/IP, procesa la información y la almacena en un archivo de salida.
 
 ---
 
-# Estructura del proyecto
+## Descripción del problema
+El objetivo principal es implementar una comunicación cliente-servidor mediante sockets utilizando TCP/IP.
 
-El proyecto está compuesto por los siguientes archivos:
+El servidor (`ServidorCamara.py`) actúa como una cámara térmica simulada. El cliente debe realizar las siguientes tareas:
+* Crear un socket TCP y conectarse al servidor.
+* Recibir e interpretar los datos como `float`.
+* Mostrar los resultados por pantalla.
+* Guardar la información en `salida.txt`.
+* Gestionar posibles errores de conexión.
 
+---
+
+## Estructura del proyecto
+```text
 Practica_3/
 │
-├── ServidorCamara.py
-├── cliente.cpp
-├── ejecutar.sh
-├── salida.txt
-└── README.md
+├── ServidorCamara.py   # Servidor TCP (simulador térmico)
+├── cliente.cpp         # Cliente TCP en C++
+├── ejecutar.sh         # Script de compilación y ejecución
+├── salida.txt          # Archivo de datos recibidos
+└── README.md           # Documentación del proyecto
+```
 
-# Descripcion de archivos
+---
 
-- ServidorCamara.py: Servidor TCP encargado de generar y enviar datos térmicos simulados
-- cliente.cpp: Cliente TCP implementado en C++ que recibe y procesa los datos enviados por el servidor
-- ejecutar.sh: Script Bash utilizado para compilar y ejecutar automáticamente el cliente
-- salida.txt: Archivo generado automáticamente donde se almacenan los datos recibidos
-- README.md: Documento descriptivo del proyecto y guía de uso
+## Requisitos del sistema
+Para ejecutar la práctica se necesita:
+* Sistema operativo Linux o WSL (Windows Subsystem for Linux).
+* Compilador g++.
+* Python 3.
+* Terminal compatible con Bash.
 
-# Requisitos del sistema
+### Instalación
+```bash
+sudo apt update
+sudo apt install g++ python3
+```
 
-Para ejecutar correctamente la práctica se necesita:
+---
 
-- Sistema operativo Linux o WSL (Windows Subsystem for Linux)
-- Compilador g++
-- Python 3
-- Terminal compatible con Bash
+## Ejecución
 
-Instalacion:
-1- Actualizar paquetes:
-    sudo apt update
-2- Instalar compilador y Python:
-    sudo apt install g++ python3
+1. **Dar permisos al script:**
+   ```bash
+   chmod +x ejecutar.sh
+   ```
 
-Permisos necesarios:
-- Dar permisos de ejecucion al script de bash: chmod +x ejecutar.sh
+2. **Lanzar el servidor:** (En una terminal)
+   ```bash
+   python3 ServidorCamara.py
+   ```
 
-# Ejecucion de la practica
+3. **Ejecutar el cliente:** (En otra terminal)
+   ```bash
+   ./ejecutar.sh
+   ```
 
-1- Ejecutar el servidor: python3 ServidorCamara.py
-2- Dar permisos al script: chmod +x ejecutar.sh
-3- Ejecutar el cliente (en otra terminal sin cerrar la anterior): /ejecutar.sh
+---
 
-# Funcionamiento
+## Funcionamiento
+1. El servidor Python escucha conexiones en la dirección IP 127.0.0.1 y el puerto 12345.
+2. El cliente C++ solicita la conexión al servidor.
+3. El servidor envía los datos térmicos simulados en formato binario.
+4. El cliente recibe los datos, los interpreta como tipo float y los almacena en un vector dinámico.
+5. Finalmente, los datos se muestran por terminal y se vuelcan en el archivo salida.txt.
 
-El funcionamiento del sistema es el siguiente:
+---
 
-1- El servidor Python crea un socket TCP y queda escuchando conexiones entrantes
-2- El cliente C++ crea su propio socket TCP
-3- El cliente se conecta al servidor mediante la dirección IP 127.0.0.1 y el puerto 12345
-4- El servidor envía datos térmicos simulados en formato float
-5- El cliente recibe los datos y los almacena en un vector dinámico
-6- Los datos recibidos se muestran por pantalla
-7- Finalmente, los datos se guardan en el archivo salida.txt
+## Resultado esperado
+Al ejecutar el cliente, se mostrará una salida similar a la siguiente:
 
-# Resultado esperado
-
-Al ejecutar correctamente la practica debe mostrar una salida similar a:
-
+```bash
 Socket creado correctamente.
 Conexion establecida con el servidor.
 Se han recibido 192 datos de temperatura correctamente.
 
 Numeros de punto flotante recibidos:
-
 3.82047e-37
 1.00825e-34
-2.65846e-32
 ...
+```
 
-Ademas, se generara automaticamente el archivo: salida.txt, conteniendo todos los datos reciidos
+---
 
-# Autor
-Ismael Fernandez Jorreto
+## Autor
+* Ismael Fernández Jorreto
