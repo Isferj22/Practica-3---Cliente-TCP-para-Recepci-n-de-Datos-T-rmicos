@@ -28,7 +28,6 @@ La práctica permite comprender el funcionamiento básico de las comunicaciones 
 
 El proyecto está compuesto por los siguientes archivos:
 
-```text
 Practica_3/
 │
 ├── ServidorCamara.py
@@ -99,5 +98,4 @@ Numeros de punto flotante recibidos:
 Ademas, se generara automaticamente el archivo: salida.txt, conteniendo todos los datos reciidos
 
 # Autor
-
 Ismael Fernandez Jorreto
